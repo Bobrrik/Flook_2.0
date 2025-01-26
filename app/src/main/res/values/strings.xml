@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flook</string>
+
+    <string name="Setting">Настройки</string>
+    <string name="Filter">Подборки</string>
+
+</resources>
