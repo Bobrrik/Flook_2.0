@@ -4,11 +4,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.flook.databinding.ItemFilmBinding
 
-class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val title = itemView.findViewById<TextView>(R.id.textTittle)
-    private val poster = itemView.findViewById<ImageView>(R.id.imageAvatar)
-    private val description = itemView.findViewById<TextView>(R.id.textDescription)
+class FilmViewHolder(private val bindingItem : ItemFilmBinding) : RecyclerView.ViewHolder(bindingItem.root) {
+
+    private val title = bindingItem.textTittle
+    private val poster = bindingItem.imageAvatar
+    private val description = bindingItem.textDescription
 
 
     fun bind(films: Films) {

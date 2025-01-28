@@ -4,4 +4,6 @@
     <string name="Setting">Настройки</string>
     <string name="Filter">Подборки</string>
 
+    <string name="textLong">"@tools:sample/lorem/random"</string>
+
 </resources>
