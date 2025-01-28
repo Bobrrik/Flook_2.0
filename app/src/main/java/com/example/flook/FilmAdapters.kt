@@ -8,20 +8,21 @@ import com.example.flook.databinding.ItemFilmBinding
 class FilmAdapters(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    lateinit var binding: ItemFilmBinding
     private val item = mutableListOf<Films>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_film, parent, false)
-        )
+        binding = ItemFilmBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FilmViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is FilmViewHolder -> {
                 holder.bind(item[position])
-                holder.itemView..setOnClickListener {
+                binding.itemRV.setOnClickListener {
                     clickListener.click(item[position])
+
                 }
             }
         }
@@ -34,6 +35,7 @@ class FilmAdapters(private val clickListener: OnItemClickListener) :
         item.addAll(list)
         notifyDataSetChanged()
     }
+
     interface OnItemClickListener {
         fun click(films: Films)
     }

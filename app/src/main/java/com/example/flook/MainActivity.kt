@@ -2,11 +2,12 @@ package com.example.flook
 
 import android.content.Intent
 import android.os.Bundle
-import android.telecom.Call.Details
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flook.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val rV = binding.recyclerView
 
         val filmDataBase = listOf(
-            Films("fff", "sdfsdf", R.drawable.film1),
+            Films("fffffffffffffffffffffffffffffffffffff", "ddddddddddddddddddddddddddddddddddddddddddddddddddd", R.drawable.film1),
             Films("fff", "sdfsdf", R.drawable.film2),
             Films("fff", "sdfsdf", R.drawable.film3),
             Films("fff", "sdfsdf", R.drawable.film4),
@@ -35,7 +36,10 @@ class MainActivity : AppCompatActivity() {
         rV.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
                 override fun click(films: Films) {
-                    val intent = Intent(this@MainActivity,MainActivity2::class.java)
+                    val bundle = Bundle()
+                    bundle.putParcelable("film", films)
+                    val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                    intent.putExtras(bundle)
                     startActivity(intent)
                 }
             })
@@ -44,6 +48,23 @@ class MainActivity : AppCompatActivity() {
             //декоратор
 
         }
+
         filmAdapters.addItems(filmDataBase)
+
+        val snackbar = Snackbar.make(binding.main, "переходик", Snackbar.LENGTH_SHORT)
+        snackbar.setAction("Понял!") {
+            Toast.makeText(this, "Сколько переходов то?!", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.navigator.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.buttonSetting -> snackbar.show()
+                R.id.buttonFilter -> snackbar.show()
+            }
+            true
+        }
+
+
+
     }
 }
