@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val rV = binding.recyclerView
 
         val filmDataBase = listOf(
-            Films("fffffffffffffffffffffffffffffffffffff", "ddddddddddddddddddddddddddddddddddddddddddddddddddd", R.drawable.film1),
+            Films("fff", "dddddd", R.drawable.film1),
             Films("fff", "sdfsdf", R.drawable.film2),
             Films("fff", "sdfsdf", R.drawable.film3),
             Films("fff", "sdfsdf", R.drawable.film4),
