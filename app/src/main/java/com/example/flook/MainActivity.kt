@@ -1,55 +1,55 @@
 package com.example.flook
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flook.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var filmAdapters: FilmAdapters
+    private var backPressed = 0L
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
-        val rV = binding.recyclerView
+        iniNavigation()
 
-        val filmDataBase = listOf(
-            Films("fff", "dddddd", R.drawable.film1),
-            Films("fff", "sdfsdf", R.drawable.film2),
-            Films("fff", "sdfsdf", R.drawable.film3),
-            Films("fff", "sdfsdf", R.drawable.film4),
-            Films("fff", "sdfsdf", R.drawable.film5),
-            Films("fff", "sdfsdf", R.drawable.film6),
-            Films("fff", "sdfsdf", R.drawable.film7),
-            Films("fff", "sdfsdf", R.drawable.film8)
-        )
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.fragmentPlaceholder.id, FilmSelectionFragment())
+            .addToBackStack(null)
+            .commit()
+    }
 
-        rV.apply {
-            filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
-                override fun click(films: Films) {
-                    val bundle = Bundle()
-                    bundle.putParcelable("film", films)
-                    val intent = Intent(this@MainActivity, MainActivity2::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
-                }
-            })
-            adapter = filmAdapters
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            //декоратор
+    fun launchDetailsFragment(films: Films) {
+        val bundle = Bundle()
+        bundle.putParcelable("film", films)
+        val fragment = FilmFragment_item()
+        fragment.arguments = bundle
 
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentPlaceholder.id, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
-        filmAdapters.addItems(filmDataBase)
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            if (backPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+                super.onBackPressed()
+                finish()
+            } else Toast.makeText(this, "Вы точно хотите выйти?", Toast.LENGTH_SHORT).show()
+            backPressed = System.currentTimeMillis()
+        } else super.onBackPressed()
+    }
+
+
+    fun iniNavigation() {
 
         val snackbar = Snackbar.make(binding.main, "переходик", Snackbar.LENGTH_SHORT)
         snackbar.setAction("Понял!") {
@@ -63,8 +63,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
 
-
-
+    companion object {
+        const val TIME_INTERVAL = 2000
     }
 }
