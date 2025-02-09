@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         } else super.onBackPressed()
     }
 
-
     fun iniNavigation() {
 
         val snackbar = Snackbar.make(binding.main, "переходик", Snackbar.LENGTH_SHORT)
