@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.Scene
+import androidx.transition.TransitionManager
 import com.example.flook.databinding.FragmentRvSelectionBinding
+import com.example.flook.databinding.MergeHomeScreenContentBinding
 import java.util.Locale
 
 class FilmSelectionFragment : Fragment() {
-    lateinit var binding: FragmentRvSelectionBinding
+    lateinit var  bindingFather : FragmentRvSelectionBinding
+    lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmAdapters: FilmAdapters
     val filmDataBase = listOf(
         Films("Фильм 1", "dddddd", R.drawable.film1),
@@ -29,13 +33,17 @@ class FilmSelectionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRvSelectionBinding.inflate(inflater, container, false)
-        return binding.root
+        binding = MergeHomeScreenContentBinding.inflate(inflater,container,false)
+        bindingFather = FragmentRvSelectionBinding.inflate(inflater, container, false)
+        return bindingFather.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val rV = binding.recyclerView
+        val scene = Scene.getSceneForLayout(bindingFather.homeFragmentRoot,R.layout.merge_home_screen_content,requireContext())
+
+        TransitionManager.go(scene)
 
         rV.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
