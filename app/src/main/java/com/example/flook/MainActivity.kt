@@ -57,8 +57,18 @@ class MainActivity : AppCompatActivity() {
 
         binding.navigator.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.buttonSetting -> snackbar.show()
-                R.id.buttonFilter -> snackbar.show()
+                R.id.buttonSetting -> {
+                    snackbar.show()
+                }
+
+                R.id.buttonFilter -> {
+                    snackbar.show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(binding.fragmentPlaceholder.id, FilmBeastFragment())
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
             true
         }
