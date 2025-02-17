@@ -20,16 +20,18 @@ class FilmHomeFragment : Fragment() {
     lateinit var bindingFragment: HomeScreenBinding
     lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmAdapters: FilmAdapters
-    val filmDataBase = listOf(
-        Films("Фильм 1", "dddddd", R.drawable.film1),
-        Films("fff", "sdfsdf", R.drawable.film2),
-        Films("Фильм 3", "sdfsdf", R.drawable.film3),
-        Films("Фильм 4", "sdfsdf", R.drawable.film4),
-        Films("Фильм 5", "sdfsdf", R.drawable.film5),
-        Films("Фильм 6", "sdfsdf", R.drawable.film6),
-        Films("Фильм 7", "sdfsdf", R.drawable.film7),
-        Films("Фильм 8", "sdfsdf", R.drawable.film8)
-    )
+
+    val filmDataBase = Base().BaseFilms()
+//    val filmDataBase = listOf(
+//        Films("Фильм 1", "dddddd", R.drawable.film1),
+//        Films("fff", "sdfsdf", R.drawable.film2),
+//        Films("Фильм 3", "sdfsdf", R.drawable.film3),
+//        Films("Фильм 4", "sdfsdf", R.drawable.film4),
+//        Films("Фильм 5", "sdfsdf", R.drawable.film5),
+//        Films("Фильм 6", "sdfsdf", R.drawable.film6),
+//        Films("Фильм 7", "sdfsdf", R.drawable.film7),
+//        Films("Фильм 8", "sdfsdf", R.drawable.film8)
+//    )
 
 //    init {
 //        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -53,11 +55,12 @@ class FilmHomeFragment : Fragment() {
             binding.root
         )
 
-        TransitionManager.go(scene,AnimatedOpen())
+        TransitionManager.go(scene, AnimatedOpen())
 
         AdapterBase()
         ClickL()
     }
+
     fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности
         val searSlide = Slide(Gravity.TOP).addTarget(binding.searchView)
         val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.recyclerView)
@@ -94,9 +97,8 @@ class FilmHomeFragment : Fragment() {
     }
 
     fun AdapterBase() {
-        val rV = binding.recyclerView
 
-        rV.apply {
+        binding.recyclerView.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
                 override fun click(films: Films) {
                     (requireActivity() as MainActivity).launchDetailsFragment(films)

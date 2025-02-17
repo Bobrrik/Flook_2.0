@@ -74,4 +74,16 @@
 
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/blue"
+        app:layout_anchor="@id/search_view"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/baseline_favorite_yes" />
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

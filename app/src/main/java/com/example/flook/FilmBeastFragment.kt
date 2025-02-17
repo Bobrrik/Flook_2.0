@@ -7,12 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Slide
 import com.example.flook.databinding.FragmentFilmBeastBinding
 
 
 class FilmBeastFragment : Fragment() {
     lateinit var binding: FragmentFilmBeastBinding
+    private lateinit var filmAdapters: FilmAdapters
+    lateinit var favoritesList: List<Films>
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentFilmBeastBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -22,21 +34,33 @@ class FilmBeastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AdapterBase()
         StartWindows()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFilmBeastBinding.inflate(inflater, container, false)
-        return binding.root
+    fun AdapterBase() {
+        favoritesList = Base().BaseFilms()
+
+        favoritesList = favoritesList.filter { it.beast == true}
+
+        binding.recyclerView.apply {
+            filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
+                override fun click(films: Films) {
+                    (requireActivity() as MainActivity).launchDetailsFragment(films)
+                }
+            })
+            adapter = filmAdapters
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        filmAdapters.addItems(favoritesList)
     }
 
     fun StartWindows() {
-        if (binding.recyclerView.size == 0) {
+        if (favoritesList.size == 0) {
             binding.blocking.alpha = 1f
-            binding.searchView.alpha = 0f
+        } else {
+            binding.blocking.alpha = 0f
         }
     }
 }
