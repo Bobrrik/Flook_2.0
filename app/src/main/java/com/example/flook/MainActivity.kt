@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(binding.fragmentPlaceholder.id, FilmSelectionFragment())
+            .add(binding.fragmentPlaceholder.id, FilmHomeFragment())
             .addToBackStack(null)
             .commit()
     }

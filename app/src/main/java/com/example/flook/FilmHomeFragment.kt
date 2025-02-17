@@ -1,6 +1,7 @@
 package com.example.flook
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Scene
+import androidx.transition.Slide
 import androidx.transition.TransitionManager
-import com.example.flook.databinding.FragmentRvSelectionBinding
+import androidx.transition.TransitionSet
+import com.example.flook.databinding.HomeScreenBinding
 import com.example.flook.databinding.MergeHomeScreenContentBinding
 import java.util.Locale
 
-class FilmSelectionFragment : Fragment() {
-    lateinit var  bindingFather : FragmentRvSelectionBinding
+class FilmHomeFragment : Fragment() {
+    lateinit var bindingFragment: HomeScreenBinding
     lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmAdapters: FilmAdapters
     val filmDataBase = listOf(
@@ -33,32 +36,32 @@ class FilmSelectionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = MergeHomeScreenContentBinding.inflate(inflater,container,false)
-        bindingFather = FragmentRvSelectionBinding.inflate(inflater, container, false)
-        return bindingFather.root
+        bindingFragment = HomeScreenBinding.inflate(inflater, container, false)
+        binding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
+        return bindingFragment.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rV = binding.recyclerView
-        val scene = Scene.getSceneForLayout(bindingFather.homeFragmentRoot,R.layout.merge_home_screen_content,requireContext())
+        val scene = Scene(
+            bindingFragment.homeFragmentRoot,
+            binding.root
+        )
 
-        TransitionManager.go(scene)
+        TransitionManager.go(scene,AnimatedOpen())
 
-        rV.apply {
-            filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
-                override fun click(films: Films) {
-                    (requireActivity() as MainActivity).launchDetailsFragment(films)
-                }
-            })
-            adapter = filmAdapters
-            layoutManager = LinearLayoutManager(requireContext())
-
-        }
-
-        filmAdapters.addItems(filmDataBase)
-
+        AdapterBase()
         ClickL()
+    }
+    fun AnimatedOpen(): TransitionSet {
+        val searSlide = Slide(Gravity.TOP).addTarget(binding.searchView)
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.recyclerView)
+        val customTransition = TransitionSet().apply {
+            duration = 500
+            addTransition(searSlide)
+            addTransition(recyclerSlide)
+        }
+        return customTransition
     }
 
     fun ClickL() {
@@ -66,12 +69,13 @@ class FilmSelectionFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                if  (newText.isEmpty()) {
+                if (newText.isEmpty()) {
                     filmAdapters.addItems(filmDataBase)
                     return true
                 }
                 val result = filmDataBase.filter {
-                    it.title.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
+                    it.title.toLowerCase(Locale.getDefault())
+                        .contains(newText.toLowerCase(Locale.getDefault()))
                 }
                 filmAdapters.addItems(result)
                 return true
@@ -84,4 +88,19 @@ class FilmSelectionFragment : Fragment() {
 
     }
 
+    fun AdapterBase() {
+        val rV = binding.recyclerView
+
+        rV.apply {
+            filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
+                override fun click(films: Films) {
+                    (requireActivity() as MainActivity).launchDetailsFragment(films)
+                }
+            })
+            adapter = filmAdapters
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        filmAdapters.addItems(filmDataBase)
+    }
 }
