@@ -1,15 +1,22 @@
 package com.example.flook
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.transition.Slide
 import com.example.flook.databinding.FragmentFilmRvBinding
 
 class FilmFragment_item : Fragment() {
     lateinit var film : Films
     lateinit var binding: FragmentFilmRvBinding
+
+    init {
+        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
+        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

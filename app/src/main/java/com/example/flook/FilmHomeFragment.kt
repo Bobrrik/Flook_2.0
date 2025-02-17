@@ -31,6 +31,11 @@ class FilmHomeFragment : Fragment() {
         Films("Фильм 8", "sdfsdf", R.drawable.film8)
     )
 
+//    init {
+//        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
+//        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +58,7 @@ class FilmHomeFragment : Fragment() {
         AdapterBase()
         ClickL()
     }
-    fun AnimatedOpen(): TransitionSet {
+    fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности
         val searSlide = Slide(Gravity.TOP).addTarget(binding.searchView)
         val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.recyclerView)
         val customTransition = TransitionSet().apply {
