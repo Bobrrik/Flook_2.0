@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     fun launchDetailsFragment(films: Films) {
         val bundle = Bundle()
         bundle.putParcelable("film", films)
-        val fragment = FilmFragment_item()
+        val fragment = Film_ItemFragment()
         fragment.arguments = bundle
 
         supportFragmentManager
@@ -57,12 +57,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.navigator.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.buttonSetting -> {
-                    snackbar.show()
+                R.id.buttonHome -> {
+                  //  snackbar.show()
                 }
 
                 R.id.buttonFilter -> {
-                    snackbar.show()
+                    //snackbar.show()
                     supportFragmentManager
                         .beginTransaction()
                         .replace(binding.fragmentPlaceholder.id, FilmBeastFragment())

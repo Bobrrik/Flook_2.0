@@ -6,7 +6,7 @@ import android.os.Parcelable
 
 data class Films(
     val title: String,
-    val textLong: String,
+    var textLong: String,
     val poster: Int,
     var beast: Boolean = false
 ) : Parcelable {
@@ -35,12 +35,10 @@ data class Films(
             return arrayOfNulls(size)
         }
     }
-
-
 }
 
 class Base {
-    val base = listOf(
+    private val base = mutableListOf(
         Films("Фильм 1", "dddddd", R.drawable.film1),
         Films("fff", "sdfsdf", R.drawable.film2),
         Films("Фильм 3", "sdfsdf", R.drawable.film3),
@@ -55,9 +53,15 @@ class Base {
         return base
     }
 
-    fun favoriteUp(films: Films) {
-
+    fun favoriteUp(name: String) {
+//        for (i in 0..base.size - 1) {
+//            if (base[i].title == name) {
+//                base[i].textLong = "trusdafasdfasasdfasfdasdfasdffasdfasfasfasdfassadfasdfsafasdfasfdasfasfsafasfasfdas"
+//            }
+//        }
     }
 
-    fun favoriteDown(films: Films) {}
+    fun favoriteDown(films: Films) {
+        films.beast = false
+    }
 }

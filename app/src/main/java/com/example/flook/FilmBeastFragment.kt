@@ -40,8 +40,10 @@ class FilmBeastFragment : Fragment() {
 
     fun AdapterBase() {
         favoritesList = Base().BaseFilms()
+       // favoritesList = Base().BaseFilms()
 
-        favoritesList = favoritesList.filter { it.beast == true}
+      //  favoritesList = favoritesList.filter { it.beast == true}
+    //    favoritesList = favoritesList.filter { it.title == "fff"}
 
         binding.recyclerView.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {

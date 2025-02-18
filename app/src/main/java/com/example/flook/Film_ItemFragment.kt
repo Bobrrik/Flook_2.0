@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.transition.Slide
 import com.example.flook.databinding.FragmentFilmRvBinding
 
-class FilmFragment_item : Fragment() {
-    lateinit var film : Films
-    lateinit var binding: FragmentFilmRvBinding
+class Film_ItemFragment : Fragment() {
+    private lateinit var film: Films
+    private lateinit var binding: FragmentFilmRvBinding
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -35,17 +35,19 @@ class FilmFragment_item : Fragment() {
     }
 
     fun ClickOn() {
-        binding.postFab.setOnClickListener{
+        binding.postFab.setOnClickListener {
             // поделиться 26.8
         }
 
         binding.beastFab.setOnClickListener {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
-                film.beast = false}
-            else {
+                film.beast = false
+              //  Base().favoriteUp(film.title)
+            } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
+               // Base().favoriteUp(film.title)
             }
         }
     }

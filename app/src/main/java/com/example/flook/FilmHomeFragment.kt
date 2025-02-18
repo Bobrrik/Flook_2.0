@@ -59,6 +59,8 @@ class FilmHomeFragment : Fragment() {
 
         AdapterBase()
         ClickL()
+
+
     }
 
     fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности

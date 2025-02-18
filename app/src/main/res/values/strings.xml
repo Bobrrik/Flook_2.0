@@ -3,6 +3,8 @@
 
     <string name="Setting">Настройки</string>
     <string name="Filter">Подборки</string>
+    <string name="Later">Смотреть позже</string>
+    <string name="Beast">Лучшее</string>
 
     <string name="textLong">"@tools:sample/lorem/random"</string>
     <!-- TODO: Remove or change this placeholder text -->
