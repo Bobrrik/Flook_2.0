@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Flook</string>
 
-    <string name="Setting">Настройки</string>
+    <string name="Home">Дом</string>
     <string name="Filter">Подборки</string>
     <string name="Later">Смотреть позже</string>
     <string name="Beast">Лучшее</string>

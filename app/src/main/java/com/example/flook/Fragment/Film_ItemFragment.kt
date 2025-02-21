@@ -1,4 +1,4 @@
-package com.example.flook
+package com.example.flook.Fragment
 
 import android.os.Bundle
 import android.view.Gravity
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.transition.Slide
+import com.example.flook.Films
+import com.example.flook.R
 import com.example.flook.databinding.FragmentFilmRvBinding
 
 class Film_ItemFragment : Fragment() {

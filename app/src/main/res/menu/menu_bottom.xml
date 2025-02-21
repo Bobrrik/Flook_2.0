@@ -9,10 +9,14 @@
     <item
         android:id="@+id/buttonHome"
         android:icon="@drawable/baseline_home_24"
-        android:title="@string/Setting" />
+        android:title="@string/Home" />
 
     <item
         android:id="@+id/buttonFilter"
         android:icon="@drawable/filter"
         android:title="@string/Filter" />
+    <item
+        android:id="@+id/buttonLookLater"
+        android:icon="@drawable/baseline_watch_later_24"
+        android:title="на потом" />
 </menu>

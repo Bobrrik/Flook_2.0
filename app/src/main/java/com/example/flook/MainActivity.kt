@@ -3,6 +3,11 @@ package com.example.flook
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flook.Fragment.FilmBeastFragment
+import com.example.flook.Fragment.FilmHomeFragment
+import com.example.flook.Fragment.Film_ItemFragment
+import com.example.flook.Fragment.FilterFragment
+import com.example.flook.Fragment.LookLaterFragment
 import com.example.flook.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -18,11 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         iniNavigation()
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(binding.fragmentPlaceholder.id, FilmHomeFragment())
-            .addToBackStack(null)
-            .commit()
+        fragmentHome()
     }
 
     fun launchDetailsFragment(films: Films) {
@@ -58,20 +59,55 @@ class MainActivity : AppCompatActivity() {
         binding.navigator.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.buttonHome -> {
-                  //  snackbar.show()
+                    fragmentHome()
                 }
 
                 R.id.buttonFilter -> {
-                    //snackbar.show()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentPlaceholder.id, FilmBeastFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    fragmentFilter()
+                }
+
+                R.id.buttonFavorite -> {
+                    fragmentBeast()
+                }
+
+                R.id.buttonLookLater -> {
+                    fragmentLookLater()
                 }
             }
             true
         }
+    }
+
+    fun fragmentHome() {
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.fragmentPlaceholder.id, FilmHomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun fragmentBeast() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentPlaceholder.id, FilmBeastFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun fragmentLookLater() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentPlaceholder.id, LookLaterFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun fragmentFilter() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentPlaceholder.id, FilterFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

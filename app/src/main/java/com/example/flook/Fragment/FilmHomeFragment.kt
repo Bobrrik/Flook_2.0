@@ -1,4 +1,4 @@
-package com.example.flook
+package com.example.flook.Fragment
 
 import android.os.Bundle
 import android.view.Gravity
@@ -12,6 +12,10 @@ import androidx.transition.Scene
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import com.example.flook.Base
+import com.example.flook.FilmAdapters
+import com.example.flook.Films
+import com.example.flook.MainActivity
 import com.example.flook.databinding.HomeScreenBinding
 import com.example.flook.databinding.MergeHomeScreenContentBinding
 import java.util.Locale
@@ -20,6 +24,11 @@ class FilmHomeFragment : Fragment() {
     lateinit var bindingFragment: HomeScreenBinding
     lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmAdapters: FilmAdapters
+
+    init {
+        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
+        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
+    }
 
     val filmDataBase = Base().BaseFilms()
 //    val filmDataBase = listOf(
