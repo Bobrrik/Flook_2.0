@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         ).toFloat()
 
         val anim = ViewAnimationUtils.createCircularReveal(binding.fragmentPlaceholder, x, y, startRad, endRad)
-        anim.duration = 2000
+        anim.duration = 500
         anim.start()
     }
 

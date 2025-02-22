@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blueDark"
+    android:background="@drawable/gradient1"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -29,7 +29,7 @@
         android:id="@+id/blocking"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#43E048" >
+        android:background="#43E048">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/animation"/>
+            app:lottie_rawRes="@raw/animation" />
 
     </FrameLayout>
 
