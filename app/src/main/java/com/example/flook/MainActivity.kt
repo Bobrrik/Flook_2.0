@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flook.Fragment.FilmBeastFragment
@@ -107,10 +106,17 @@ class MainActivity : AppCompatActivity() {
         val y: Int = view.y.roundToInt() + view.height / 2
         val startRad = 0f
         val endRad = hypot(
-            binding.fragmentPlaceholder.width.toDouble(), binding.fragmentPlaceholder.height.toDouble()
+            binding.fragmentPlaceholder.width.toDouble(),
+            binding.fragmentPlaceholder.height.toDouble()
         ).toFloat()
 
-        val anim = ViewAnimationUtils.createCircularReveal(binding.fragmentPlaceholder, x, y, startRad, endRad)
+        val anim = ViewAnimationUtils.createCircularReveal(
+            binding.fragmentPlaceholder,
+            x,
+            y,
+            startRad,
+            endRad
+        )
         anim.duration = 500
         anim.start()
     }

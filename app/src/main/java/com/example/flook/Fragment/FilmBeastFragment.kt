@@ -45,7 +45,7 @@ class FilmBeastFragment : Fragment() {
         favoritesList = Base().BaseFilms()
         // favoritesList = Base().BaseFilms()
 
-        favoritesList = favoritesList.filter { it.beast == true}
+        favoritesList = favoritesList.filter { it.beast == true }
         //    favoritesList = favoritesList.filter { it.title == "fff"}
 
         binding.recyclerView.apply {

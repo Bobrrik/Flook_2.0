@@ -2,10 +2,10 @@ package com.example.flook.Fragment
 
 import android.os.Bundle
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.transition.Slide
 import com.example.flook.R
 

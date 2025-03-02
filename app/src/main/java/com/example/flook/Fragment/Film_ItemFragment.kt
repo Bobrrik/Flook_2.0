@@ -45,11 +45,11 @@ class Film_ItemFragment : Fragment() {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
                 film.beast = false
-              //  Base().favoriteUp(film.title)
+                //  Base().favoriteUp(film.title)
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
-               // Base().favoriteUp(film.title)
+                // Base().favoriteUp(film.title)
             }
         }
     }
