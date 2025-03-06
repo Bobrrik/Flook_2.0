@@ -29,16 +29,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Анимация появления
-        Executors.newSingleThreadExecutor().execute {
-            while (true) {
-                if (binding.blocking.isAttachedToWindow) {
-                    runOnUiThread {
-                        startWindows()
-                    }
-                    return@execute
-                }
-            }
-        }
+//        Executors.newSingleThreadExecutor().execute {
+//            while (true) {
+//                if (binding.blocking.isAttachedToWindow) {
+//                    runOnUiThread {
+//                        startWindows()
+//                    }
+//                    return@execute
+//                }
+//            }
+//        }
 
         iniNavigation()
 

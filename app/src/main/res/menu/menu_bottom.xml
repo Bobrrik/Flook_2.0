@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/buttonHome"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/Home" />
 
     <item
         android:id="@+id/buttonFavorite"
         android:icon="@drawable/baseline_favorite_yes"
         android:title="@string/Beast" />
-
-    <item
-        android:id="@+id/buttonHome"
-        android:icon="@drawable/baseline_home_24"
-        android:title="@string/Home" />
 
     <item
         android:id="@+id/buttonFilter"

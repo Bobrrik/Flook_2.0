@@ -29,7 +29,8 @@
         android:id="@+id/blocking"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#43E048">
+        android:background="#43E048"
+        android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim"

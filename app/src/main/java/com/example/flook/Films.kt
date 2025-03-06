@@ -4,12 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-data class Films(
-    val title: String,
-    var textLong: String,
-    val poster: Int,
-    var beast: Boolean = false
-) : Parcelable {
+
+data class Films(val title: String, var textLong: String, val poster: Int, var beast: Boolean = false) : Parcelable {
+
+   // val title: String, var textLong: String, val poster: Int, var beast: Boolean = false
+
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),
@@ -40,13 +39,13 @@ data class Films(
 class Base {
     private val base = mutableListOf(
         Films("Фильм 1", "dddddd", R.drawable.film1),
-        Films("fff", "sdfsdf", R.drawable.film2),
+        Films("fff", "sdfsdf", R.drawable.film2, true),
         Films("Фильм 3", "sdfsdf", R.drawable.film3),
         Films("Фильм 4", "sdfsdf", R.drawable.film4),
         Films("Фильм 5", "sdfsdf", R.drawable.film5),
         Films("Фильм 6", "sdfsdf", R.drawable.film6),
-        Films("Фильм 7", "sdfsdf", R.drawable.film7),
-        Films("Фильм 8", "sdfsdf", R.drawable.film8)
+        Films("Фильм 7", "sdfsdf", R.drawable.film7, true),
+        Films("Фильм 8", "sdfsdf", R.drawable.film8, true)
     )
 
     fun BaseFilms(): List<Films> {
@@ -54,6 +53,13 @@ class Base {
     }
 
     fun favoriteUp(name: String) {
+        val item = Films("Новинка", "sdfsdf", R.drawable.film8)
+        item.beast = true
+
+
+        base.removeAll{it.title==name}
+        base.add(item)
+
 //        for (i in 0..base.size - 1) {
 //            if (base[i].title == name) {
 //                base[i].textLong = "trusdafasdfasasdfasfdasdfasdffasdfasfasfasdfassadfasdfsafasdfasfdasfasfsafasfasfdas"
