@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Custom">
+        <attr name="stroke_width" format="float"/>
+        <attr name="progress" format="float"/>
+        <attr name="backgroundColor" format="color"/>
+    </declare-styleable>
+
+</resources>

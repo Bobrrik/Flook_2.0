@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 
 
-data class Films(val title: String, var textLong: String, val poster: Int, var beast: Boolean = false) : Parcelable {
+data class Films(val title: String, var textLong: String, val poster: Int, var beast: Boolean = false, val rating: Int = 50) : Parcelable {
 
    // val title: String, var textLong: String, val poster: Int, var beast: Boolean = false
 
