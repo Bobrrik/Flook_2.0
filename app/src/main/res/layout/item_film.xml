@@ -67,12 +67,13 @@
     </androidx.cardview.widget.CardView>
 
     <com.example.flook.RatingDonutView
+        android:id="@+id/ratingRV"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|left"
         android:layout_marginStart="2dp"
-        app:progress ="84"
         android:layout_marginBottom="2dp"
+        app:backgroundColor="@color/blueWhite"
         android:elevation="2dp"
         />
 </FrameLayout>
