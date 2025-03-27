@@ -66,7 +66,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.example.flook.RatingDonutView
+    <com.example.flook.view.customviews.RatingDonutView
         android:id="@+id/ratingRV"
         android:layout_width="50dp"
         android:layout_height="50dp"

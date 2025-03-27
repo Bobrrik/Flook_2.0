@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/filmHomeFragment">
+
+    <fragment
+        android:id="@+id/filmHomeFragment"
+        android:name="com.example.flook.view.fragments.FilmHomeFragment"
+        android:label="FilmHomeFragment" />
+    <fragment
+        android:id="@+id/filmBeastFragment"
+        android:name="com.example.flook.view.fragments.FilmBeastFragment"
+        android:label="fragment_film_beast"
+        tools:layout="@layout/fragment_film_beast" />
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.example.flook.view.fragments.FilterFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter" />
+    <fragment
+        android:id="@+id/lookLaterFragment"
+        android:name="com.example.flook.view.fragments.LookLaterFragment"
+        android:label="fragment_look_later"
+        tools:layout="@layout/fragment_look_later" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.flook.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>

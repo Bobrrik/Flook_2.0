@@ -1,9 +1,11 @@
-package com.example.flook
+package com.example.flook.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.flook.view.rv_viewholders.FilmViewHolder
 import com.example.flook.databinding.ItemFilmBinding
+import com.example.flook.domain.Films
 
 class FilmAdapters(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -48,6 +48,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // https://mvnrepository.com/artifact/com.airbnb.android/lottie
-    implementation("com.airbnb.android:lottie:3.4.4")
+    implementation(libs.lottie)
+    implementation (libs.androidx.navigation.fragment.ktx)
+    implementation (libs.androidx.navigation.ui.ktx)
 
 }

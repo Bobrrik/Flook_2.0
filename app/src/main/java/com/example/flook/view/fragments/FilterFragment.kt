@@ -1,4 +1,4 @@
-package com.example.flook.Fragment
+package com.example.flook.view.fragments
 
 import android.os.Bundle
 import android.view.Gravity
