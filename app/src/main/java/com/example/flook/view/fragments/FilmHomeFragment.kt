@@ -1,4 +1,4 @@
-package com.example.flook.Fragment
+package com.example.flook.view.fragments
 
 import android.os.Bundle
 import android.view.Gravity
@@ -7,40 +7,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Scene
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
-import com.example.flook.Base
-import com.example.flook.FilmAdapters
-import com.example.flook.Films
 import com.example.flook.MainActivity
 import com.example.flook.databinding.HomeScreenBinding
 import com.example.flook.databinding.MergeHomeScreenContentBinding
+import com.example.flook.domain.Films
+import com.example.flook.view.rv_adapters.FilmAdapters
+import com.example.flook.viewmodel.HomeFragmentViewModel
 import java.util.Locale
 
 class FilmHomeFragment : Fragment() {
     lateinit var bindingFragment: HomeScreenBinding
     lateinit var binding: MergeHomeScreenContentBinding
     private lateinit var filmAdapters: FilmAdapters
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    }
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
         reenterTransition = Slide(Gravity.START).apply { duration = 800; }
     }
 
-    val filmDataBase = Base().BaseFilms()
-//    val filmDataBase = listOf(
-//        Films("Фильм 1", "dddddd", R.drawable.film1),
-//        Films("fff", "sdfsdf", R.drawable.film2),
-//        Films("Фильм 3", "sdfsdf", R.drawable.film3),
-//        Films("Фильм 4", "sdfsdf", R.drawable.film4),
-//        Films("Фильм 5", "sdfsdf", R.drawable.film5),
-//        Films("Фильм 6", "sdfsdf", R.drawable.film6),
-//        Films("Фильм 7", "sdfsdf", R.drawable.film7),
-//        Films("Фильм 8", "sdfsdf", R.drawable.film8)
-//    )
+    private var filmDataBase = listOf<Films>()
+        set(value) {
+            if (field == value) return
+
+            field = value
+            filmAdapters.addItems(field)
+        }
+//    private val filmDataBase = BaseFilm().BaseFilms()
+
 
 //    init {
 //        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -63,6 +66,10 @@ class FilmHomeFragment : Fragment() {
             bindingFragment.homeFragmentRoot,
             binding.root
         )
+
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
+            filmDataBase = it
+        })
 
         TransitionManager.go(scene, AnimatedOpen())
 

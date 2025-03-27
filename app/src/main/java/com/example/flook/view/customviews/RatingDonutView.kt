@@ -1,4 +1,4 @@
-package com.example.flook
+package com.example.flook.view.customviews
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,6 +8,7 @@ import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
+import com.example.flook.R
 
 class RatingDonutView @JvmOverloads constructor(
     context: Context,

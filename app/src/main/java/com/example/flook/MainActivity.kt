@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flook.Fragment.FilmBeastFragment
-import com.example.flook.Fragment.FilmHomeFragment
-import com.example.flook.Fragment.Film_ItemFragment
-import com.example.flook.Fragment.FilterFragment
-import com.example.flook.Fragment.LookLaterFragment
+import com.example.flook.view.fragments.FilmBeastFragment
+import com.example.flook.view.fragments.FilmHomeFragment
+import com.example.flook.view.fragments.Film_ItemFragment
+import com.example.flook.view.fragments.FilterFragment
+import com.example.flook.view.fragments.LookLaterFragment
 import com.example.flook.databinding.ActivityMainBinding
+import com.example.flook.domain.Films
 import com.google.android.material.snackbar.Snackbar
-import java.util.concurrent.Executors
 import kotlin.math.hypot
 import kotlin.math.roundToInt
 
@@ -101,24 +101,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun reval(view: View) {
-        val x: Int = view.x.roundToInt() + view.width / 2
-        val y: Int = view.y.roundToInt() + view.height / 2
-        val startRad = 0f
-        val endRad = hypot(
-            binding.fragmentPlaceholder.width.toDouble(),
-            binding.fragmentPlaceholder.height.toDouble()
-        ).toFloat()
-
-        val anim = ViewAnimationUtils.createCircularReveal(
-            binding.fragmentPlaceholder,
-            x,
-            y,
-            startRad,
-            endRad
-        )
-        anim.duration = 500
-        anim.start()
+    fun reval(view: View) {   //  анимация нажатия и переходов
+//        val x: Int = view.x.roundToInt() + view.width / 2
+//        val y: Int = view.y.roundToInt() + view.height / 2
+//        val startRad = 0f
+//        val endRad = hypot(
+//            binding.fragmentPlaceholder.width.toDouble(),
+//            binding.fragmentPlaceholder.height.toDouble()
+//        ).toFloat()
+//
+//        val anim = ViewAnimationUtils.createCircularReveal(
+//            binding.fragmentPlaceholder,
+//            x,
+//            y,
+//            startRad,
+//            endRad
+//        )
+//        anim.duration = 500
+//        anim.start()
     }
 
     fun startWindows() {

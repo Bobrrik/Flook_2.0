@@ -1,4 +1,4 @@
-package com.example.flook.Fragment
+package com.example.flook.view.fragments
 
 import android.os.Bundle
 import android.view.Gravity
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.transition.Slide
-import com.example.flook.Base
-import com.example.flook.Films
+import com.example.flook.data.BaseFilm
+import com.example.flook.domain.Films
 import com.example.flook.R
 import com.example.flook.databinding.FragmentFilmRvBinding
 
@@ -46,11 +46,11 @@ class Film_ItemFragment : Fragment() {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
                 film.beast = false
-                Base().favoriteUp(film.title)
+                BaseFilm().favoriteUp(film.title)
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
-                 Base().favoriteUp(film.title)
+                 BaseFilm().favoriteUp(film.title)
             }
         }
     }
