@@ -52,4 +52,11 @@ dependencies {
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
 
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
+    // https://mvnrepository.com/artifact/com.artisan-software.glide/desktop
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
 }

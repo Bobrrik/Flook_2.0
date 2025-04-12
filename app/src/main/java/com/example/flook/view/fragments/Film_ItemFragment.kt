@@ -5,11 +5,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.helper.widget.Grid
 import androidx.fragment.app.Fragment
 import androidx.transition.Slide
+import com.bumptech.glide.Glide
 import com.example.flook.data.BaseFilm
 import com.example.flook.domain.Films
 import com.example.flook.R
+import com.example.flook.data.ApiConstants
 import com.example.flook.databinding.FragmentFilmRvBinding
 
 class Film_ItemFragment : Fragment() {
@@ -46,11 +49,11 @@ class Film_ItemFragment : Fragment() {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
                 film.beast = false
-                BaseFilm().favoriteUp(film.title)
+               // требуется реализация изменния статуса избранного
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
-                 BaseFilm().favoriteUp(film.title)
+                // требуется реализация изменния статуса избранного
             }
         }
     }
@@ -60,7 +63,11 @@ class Film_ItemFragment : Fragment() {
 
         binding.detailsToolbar.title = film.title
         binding.detailsDescription.text = film.textLong
-        binding.detailsPoster.setImageResource(film.poster)
+
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL+"w342"+film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
 
         binding.beastFab.setImageResource(
             if (film.beast) R.drawable.baseline_favorite_yes

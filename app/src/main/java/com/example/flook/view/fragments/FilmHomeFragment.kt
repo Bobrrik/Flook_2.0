@@ -42,8 +42,6 @@ class FilmHomeFragment : Fragment() {
             field = value
             filmAdapters.addItems(field)
         }
-//    private val filmDataBase = BaseFilm().BaseFilms()
-
 
 //    init {
 //        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
