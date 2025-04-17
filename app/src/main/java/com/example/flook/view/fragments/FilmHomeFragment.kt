@@ -97,10 +97,17 @@ class FilmHomeFragment : Fragment() {
                     filmAdapters.addItems(filmDataBase)
                     return true
                 }
+
+//                val result = filmDataBase.filter {
+//                    it.title.toLowerCase(Locale.getDefault())
+//                        .contains(newText.toLowerCase(Locale.getDefault()))
+//                }
+
                 val result = filmDataBase.filter {
-                    it.title.toLowerCase(Locale.getDefault())
-                        .contains(newText.toLowerCase(Locale.getDefault()))
+                    it.title.lowercase(Locale.getDefault())
+                        .contains(newText.lowercase(Locale.getDefault()))
                 }
+
                 filmAdapters.addItems(result)
                 return true
             }

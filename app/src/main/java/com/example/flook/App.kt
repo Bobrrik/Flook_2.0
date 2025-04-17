@@ -10,14 +10,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class App : Application() {
 
     lateinit var repo: BaseFilm
     lateinit var interactor: Interactor
-    lateinit var retrofitService : TmdbApi
+    lateinit var retrofitService: TmdbApi
 
     override fun onCreate() {
         super.onCreate()
@@ -25,14 +24,15 @@ class App : Application() {
         repo = BaseFilm()
 
         val okHttpClient = OkHttpClient.Builder()
-            .callTimeout(30,TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS)
+            .callTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply {
-                if(BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG) {
                     level = HttpLoggingInterceptor.Level.BASIC
                 }
             })
             .build()
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(ApiConstants.BASE_URL)

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             } else Toast.makeText(this, "Вы точно хотите выйти?", Toast.LENGTH_SHORT).show()
             backPressed = System.currentTimeMillis()
-        } else super.onBackPressed()
+        } else  super.onBackPressed()
     }
 
     fun iniNavigation() {
