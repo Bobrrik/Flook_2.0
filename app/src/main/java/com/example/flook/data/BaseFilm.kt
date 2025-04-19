@@ -5,7 +5,7 @@ import com.example.flook.domain.Films
 
 class BaseFilm {
      val base = mutableListOf(
-        Films("Фильм 1", "dddddd", "R.drawable.film1", 74),
+        Films("Фильм 1", "dddddd", "R.drawable.film1", 74,true),
 //        Films("Фильм 1", "dddddd", R.drawable.film1, 74),
 //        Films("fff", "sdfsdf", R.drawable.film2, 34, true),
 //        Films("Фильм 3", "sdfsdf", R.drawable.film3, 12),
