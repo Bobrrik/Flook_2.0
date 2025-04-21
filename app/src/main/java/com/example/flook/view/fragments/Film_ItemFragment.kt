@@ -66,7 +66,6 @@ class Film_ItemFragment : Fragment() {
 
         Glide.with(this)
             .load(ApiConstants.IMAGES_URL+"w342"+film.poster)
-            .centerCrop()
             .into(binding.detailsPoster)
 
         binding.beastFab.setImageResource(

@@ -20,7 +20,10 @@ class Interactor(val repo: BaseFilm, private val retrofitService: TmdbApi) {
                 callback.onFailure()
             }
 
-            override fun onResponse(call: Call<TmdbResultsDto>, response: Response<TmdbResultsDto>) {
+            override fun onResponse(
+                call: Call<TmdbResultsDto>,
+                response: Response<TmdbResultsDto>
+            ) {
                 callback.onSuccess(Converter.convertApiListToDtoList(response.body()?.tmdbFilms))
             }
         })
