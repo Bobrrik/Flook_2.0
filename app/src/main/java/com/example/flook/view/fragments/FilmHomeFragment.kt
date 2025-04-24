@@ -15,8 +15,8 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.example.flook.MainActivity
+import com.example.flook.databinding.FragmentHomeBinding
 import com.example.flook.databinding.HomeScreenBinding
-import com.example.flook.databinding.MergeHomeScreenContentBinding
 import com.example.flook.domain.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
@@ -24,11 +24,12 @@ import java.util.Locale
 
 class FilmHomeFragment : Fragment() {
     lateinit var bindingFragment: HomeScreenBinding
-    lateinit var binding: MergeHomeScreenContentBinding
+    lateinit var binding: FragmentHomeBinding
     private lateinit var filmAdapters: FilmAdapters
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    var page = 1
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -42,8 +43,6 @@ class FilmHomeFragment : Fragment() {
             field = value
             filmAdapters.addItems(field)
         }
-//    private val filmDataBase = BaseFilm().BaseFilms()
-
 
 //    init {
 //        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -56,12 +55,13 @@ class FilmHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindingFragment = HomeScreenBinding.inflate(inflater, container, false)
-        binding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return bindingFragment.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val scene = Scene(
             bindingFragment.homeFragmentRoot,
             binding.root
@@ -69,14 +69,46 @@ class FilmHomeFragment : Fragment() {
 
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
             filmDataBase = it
-        })
 
+        })
         TransitionManager.go(scene, AnimatedOpen())
 
         AdapterBase()
         ClickL()
 
 
+        swapPage()
+
+//        binding.buttonTest.setOnClickListener {               // безуспешные попытки реализации
+//            swapPage()
+//            Log.e("sdfsfsadf", "sdfasfasdfasdfasdfasdfasfsafasfd")
+//        }
+
+//        scrollSetting()
+    }
+
+    fun scrollSetting() {
+
+//        val scrollListener = object : RecyclerView.OnScrollListener() {
+//                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//
+//                        val layoutManager = recyclerView.layoutManager as RecyclerView.LayoutManager
+//                        val totalItemCount: Int = layoutManager.itemCount
+//                        val lastVisibleItems =
+//                            (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+//                        val endHasBeenReached = lastVisibleItems + 5 >= totalItemCount
+//
+//                        if (totalItemCount > 0 && endHasBeenReached) {
+//                            Log.e("activity", "ТЫ ТУТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//                        }
+//            }
+//        }
+//        binding.recyclerView.setOnScrollListener(scrollListener)
+    }
+
+    fun swapPage() {
+        HomeFragmentViewModel().newPage(2)
+        filmAdapters.notifyDataSetChanged()
     }
 
     fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности
@@ -99,10 +131,17 @@ class FilmHomeFragment : Fragment() {
                     filmAdapters.addItems(filmDataBase)
                     return true
                 }
+
+//                val result = filmDataBase.filter {
+//                    it.title.toLowerCase(Locale.getDefault())
+//                        .contains(newText.toLowerCase(Locale.getDefault()))
+//                }
+
                 val result = filmDataBase.filter {
-                    it.title.toLowerCase(Locale.getDefault())
-                        .contains(newText.toLowerCase(Locale.getDefault()))
+                    it.title.lowercase(Locale.getDefault())
+                        .contains(newText.lowercase(Locale.getDefault()))
                 }
+
                 filmAdapters.addItems(result)
                 return true
             }

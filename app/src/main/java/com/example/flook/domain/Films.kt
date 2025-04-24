@@ -7,7 +7,7 @@ import android.os.Parcelable
 data class Films(
     val title: String,
     var textLong: String,
-    val poster: Int,
+    val poster: String,
     val rating: Int = 50,
     var beast: Boolean = false
 ) : Parcelable {
@@ -17,7 +17,8 @@ data class Films(
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),
-        parcel.readInt()
+        parcel.readString().toString()
+        //parcel.readInt()
     )
 
     override fun describeContents(): Int {
@@ -27,7 +28,8 @@ data class Films(
     override fun writeToParcel(p0: Parcel, p1: Int) {
         p0.writeString(title)
         p0.writeString(textLong)
-        p0.writeInt(poster)
+//        p0.writeInt(poster)
+        p0.writeString(poster)
     }
 
     companion object CREATOR : Parcelable.Creator<Films> {

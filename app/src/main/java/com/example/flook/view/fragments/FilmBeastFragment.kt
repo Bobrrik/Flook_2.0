@@ -6,19 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Slide
-import com.example.flook.data.BaseFilm
-import com.example.flook.view.rv_adapters.FilmAdapters
-import com.example.flook.domain.Films
 import com.example.flook.MainActivity
 import com.example.flook.databinding.FragmentFilmBeastBinding
+import com.example.flook.domain.Films
+import com.example.flook.view.rv_adapters.FilmAdapters
+import com.example.flook.viewmodel.HomeFragmentViewModel
 
 
 class FilmBeastFragment : Fragment() {
     lateinit var binding: FragmentFilmBeastBinding
     private lateinit var filmAdapters: FilmAdapters
-    lateinit var favoritesList: List<Films>
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+
+    }
+    private var favoritesList = listOf<Films>()
+        set(value) {
+            if (field == value) return
+            val filteredList = value.filter { it.beast == true }
+            field = filteredList
+            filmAdapters.addItems(field)
+        }
+
+//          favoritesList = favoritesList.filter { it.beast == true }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,17 +51,15 @@ class FilmBeastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
+            favoritesList = it
+        })
+
         AdapterBase()
-        StartWindows()
+     //   StartWindows()
     }
 
     fun AdapterBase() {
-
-        favoritesList = BaseFilm().BaseFilms()
-        //= favoritesList = Base().BaseFilms()
-
-        favoritesList = favoritesList.filter { it.beast == true }
-        //    favoritesList = favoritesList.filter { it.title == "fff"}
 
         binding.recyclerView.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
@@ -62,8 +74,8 @@ class FilmBeastFragment : Fragment() {
         filmAdapters.addItems(favoritesList)
     }
 
-    fun StartWindows() {
-        if (favoritesList.size == 0) {
+    fun StartWindows() {   // реализовать метод
+        if (filmAdapters.equals(null)) {
             binding.blocking.alpha = 1f
         } else {
             binding.blocking.alpha = 0f
