@@ -15,9 +15,10 @@ import com.example.flook.view.fragments.LookLaterFragment
 import com.example.flook.databinding.ActivityMainBinding
 import com.example.flook.domain.Films
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.hypot
 import kotlin.math.roundToInt
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var backPressed = 0L
     private lateinit var binding: ActivityMainBinding
