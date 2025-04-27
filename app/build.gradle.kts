@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
+    id ("kotlin-kapt")
 
 }
 
@@ -77,8 +77,9 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.okhttp3.logging.interceptor)
 
-    implementation( "com.google.dagger:hilt-android:2.28-alpha")
-    kapt ("com.google.dagger:hilt-android-compiler:2.28-alpha")
-
     implementation ("io.insert-koin:koin-android:2.0.1")
+
+    implementation ("com.google.dagger:dagger:2.30.1")
+    kapt ("com.google.dagger:dagger-compiler:2.30.1")
+    implementation ("androidx.core:core-ktx:1.3.2")
 }

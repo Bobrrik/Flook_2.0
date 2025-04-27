@@ -3,12 +3,10 @@ package com.example.flook
 import android.app.Application
 import com.example.flook.di.DI
 import com.example.flook.domain.Interactor
-import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-@HiltAndroidApp
 class App : Application() {
 
     //    lateinit var repo: BaseFilm
