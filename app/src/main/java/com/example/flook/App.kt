@@ -1,29 +1,31 @@
 package com.example.flook
 
 import android.app.Application
-import com.example.flook.di.DI
+import com.example.flook.di.AppComponent
+import com.example.flook.di.DaggerAppComponent
 import com.example.flook.domain.Interactor
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+
 
 class App : Application() {
 
-    //    lateinit var repo: BaseFilm
-    lateinit var interactor: Interactor
-//    lateinit var retrofitService: TmdbApi
+lateinit var dagger:AppComponent
+    //lateinit var interactor: Interactor
+
 
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
-            androidContext(this@App)
-            androidLogger()
-            modules(listOf(DI.mainModule))
-        }
 
 
-//        instance = this
+//        startKoin {
+//            androidContext(this@App)
+//            androidLogger()
+//            modules(listOf(DI.mainModule))
+//        }
+
+        instance = this
+
+        dagger = DaggerAppComponent.create()
 //        repo = BaseFilm()
 
 //        val okHttpClient = OkHttpClient.Builder()
