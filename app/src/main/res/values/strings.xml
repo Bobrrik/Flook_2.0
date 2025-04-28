@@ -2,9 +2,14 @@
     <string name="app_name">Flook</string>
 
     <string name="Home">Дом</string>
-    <string name="Filter">Подборки</string>
+    <string name="Setting">Настройки</string>
     <string name="Later">Смотреть позже</string>
     <string name="Beast">Лучшее</string>
+
+    <string name="radio_button_popular">Популярные</string>
+    <string name="radio_button_top_rated">Топ</string>
+    <string name="radio_button_upcoming">Скоро</string>
+    <string name="radio_button_playing">В кинотеатрах</string>
 
     <string name="textLong">"@tools:sample/lorem/random"</string>
     <!-- TODO: Remove or change this placeholder text -->

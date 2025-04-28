@@ -29,7 +29,6 @@ class FilmHomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
-    var page = 1
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -44,15 +43,8 @@ class FilmHomeFragment : Fragment() {
             filmAdapters.addItems(field)
         }
 
-//    init {
-//        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
-//        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
-//    }
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         bindingFragment = HomeScreenBinding.inflate(inflater, container, false)
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -62,29 +54,20 @@ class FilmHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val scene = Scene(
-            bindingFragment.homeFragmentRoot,
-            binding.root
-        )
+        val scene = Scene(bindingFragment.homeFragmentRoot, binding.root) // смена сцены
 
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
             filmDataBase = it
-
+            filmAdapters.addItems(it)
         })
+
         TransitionManager.go(scene, AnimatedOpen())
 
         AdapterBase()
         ClickL()
-
+        initPullToRefresh()
 
         swapPage()
-
-//        binding.buttonTest.setOnClickListener {               // безуспешные попытки реализации
-//            swapPage()
-//            Log.e("sdfsfsadf", "sdfasfasdfasdfasdfasdfasfsafasfd")
-//        }
-
-//        scrollSetting()
     }
 
     fun scrollSetting() {
@@ -107,8 +90,8 @@ class FilmHomeFragment : Fragment() {
     }
 
     fun swapPage() {
-        HomeFragmentViewModel().newPage(2)
-        filmAdapters.notifyDataSetChanged()
+//        HomeFragmentViewModel().newPage(2)
+//        filmAdapters.notifyDataSetChanged()
     }
 
     fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности
@@ -166,5 +149,13 @@ class FilmHomeFragment : Fragment() {
         }
 
         filmAdapters.addItems(filmDataBase)
+    }
+
+    private fun initPullToRefresh() {
+        binding.refresh.setOnRefreshListener {
+            filmAdapters.item.clear()
+            viewModel.newPage()
+            binding.refresh.isRefreshing = false
+        }
     }
 }

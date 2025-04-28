@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flook.view.fragments.FilmBeastFragment
 import com.example.flook.view.fragments.FilmHomeFragment
 import com.example.flook.view.fragments.Film_ItemFragment
-import com.example.flook.view.fragments.FilterFragment
+import com.example.flook.view.fragments.SettingsFragment
 import com.example.flook.view.fragments.LookLaterFragment
 import com.example.flook.databinding.ActivityMainBinding
 import com.example.flook.domain.Films
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
     fun fragmentFilter() {
         supportFragmentManager
             .beginTransaction()
-            .replace(binding.fragmentPlaceholder.id, FilterFragment())
+            .replace(binding.fragmentPlaceholder.id, SettingsFragment())
             .addToBackStack(null)
             .commit()
     }
