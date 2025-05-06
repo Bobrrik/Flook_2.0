@@ -77,9 +77,9 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.okhttp3.logging.interceptor)
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation ("io.insert-koin:koin-android:2.0.1")
 
-    implementation ("com.google.dagger:dagger:2.56.2")
-    kapt ("com.google.dagger:dagger-compiler:2.56.2")
-    implementation ("androidx.core:core-ktx:1.16.0")
+    implementation ("com.google.dagger:dagger:2.30.1")
+    kapt ("com.google.dagger:dagger-compiler:2.30.1")
+    implementation ("androidx.core:core-ktx:1.3.2")
 }

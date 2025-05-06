@@ -4,7 +4,6 @@ import com.example.flook.di.modules.DatabaseModule
 import com.example.flook.di.modules.DomainModule
 import com.example.flook.di.modules.RemoteModule
 import com.example.flook.viewmodel.HomeFragmentViewModel
-import com.example.flook.viewmodel.SettingsFragmentViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -25,7 +24,5 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
-    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
 }
-
 
