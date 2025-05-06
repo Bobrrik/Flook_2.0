@@ -11,7 +11,7 @@ class FilmAdapters(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var binding: ItemFilmBinding
-    private val item = mutableListOf<Films>()
+     val item = mutableListOf<Films>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         binding = ItemFilmBinding.inflate(LayoutInflater.from(parent.context), parent, false)

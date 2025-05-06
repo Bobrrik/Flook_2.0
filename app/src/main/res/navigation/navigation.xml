@@ -16,9 +16,9 @@
         tools:layout="@layout/fragment_film_beast" />
     <fragment
         android:id="@+id/filterFragment"
-        android:name="com.example.flook.view.fragments.FilterFragment"
+        android:name="com.example.flook.view.fragments.SettingsFragment"
         android:label="fragment_filter"
-        tools:layout="@layout/fragment_filter" />
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/lookLaterFragment"
         android:name="com.example.flook.view.fragments.LookLaterFragment"

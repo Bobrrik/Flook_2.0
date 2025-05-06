@@ -11,11 +11,11 @@
         android:title="@string/Beast" />
 
     <item
-        android:id="@+id/buttonFilter"
-        android:icon="@drawable/filter"
-        android:title="@string/Filter" />
-    <item
         android:id="@+id/buttonLookLater"
         android:icon="@drawable/baseline_watch_later_24"
         android:title="на потом" />
+    <item
+        android:id="@+id/buttonFilter"
+        android:icon="@drawable/filter"
+        android:title="@string/Setting" />
 </menu>
