@@ -6,16 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Slide
 import com.bumptech.glide.Glide
 import com.example.flook.domain.Films
 import com.example.flook.R
 import com.example.flook.data.ApiConstants
 import com.example.flook.databinding.FragmentFilmRvBinding
+import com.example.flook.viewmodel.Film_ItemFragmentViewModel
+import com.example.flook.viewmodel.HomeFragmentViewModel
 
 class Film_ItemFragment : Fragment() {
     private lateinit var film: Films
     private lateinit var binding: FragmentFilmRvBinding
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(Film_ItemFragmentViewModel::class.java)
+    }
 
     init {
         exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
@@ -47,10 +53,13 @@ class Film_ItemFragment : Fragment() {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
                 film.beast = false
+                viewModel.swapBeast(requireContext(),binding.detailsToolbar.title.toString(),0)
+
                // требуется реализация изменния статуса избранного
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
+                viewModel.swapBeast(requireContext(),binding.detailsToolbar.title.toString(),1)
                 // требуется реализация изменния статуса избранного
             }
         }

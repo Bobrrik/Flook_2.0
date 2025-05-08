@@ -22,7 +22,7 @@ class RepositoryBD(dataBaseHelper: DataBaseHelper) {
             put(DataBaseHelper.COLUMN_POSTER, film.poster)
             put(DataBaseHelper.COLUMN_DESCRIPTION, film.textLong)
             put(DataBaseHelper.COLUMN_RATING, (film.rating).toDouble() / 10)
-            put(DataBaseHelper.COLUMN_BEAST, toIntFromBoolean(film.beast))
+            put(DataBaseHelper.COLUMN_BEAST, toIntFromBoolean(film.beast))      //  в рвмках идеи переделать на String -> Boolean
         }
         sqlDB.insert(DataBaseHelper.TABLE_NAME, null, cv)
     }
@@ -37,7 +37,7 @@ class RepositoryBD(dataBaseHelper: DataBaseHelper) {
                 val poster = cursor.getString(2)
                 val textLong = cursor.getString(3)
                 val rating = (cursor.getDouble(4) * 10).toInt()  // приходит Double а нужен Int
-                val best = toBooleanFromInt(cursor.getInt(5))       // приходит Int нужен Boolean
+                val best = toBooleanFromInt(cursor.getInt(5))       // приходит Int нужен Boolean //  в рвмках идеи переделать на Boolean -> String
 
                 result.add(Films(title, textLong, poster, rating, best))
             } while (cursor.moveToNext())
@@ -45,8 +45,8 @@ class RepositoryBD(dataBaseHelper: DataBaseHelper) {
         return result
     }
 
-    fun toBooleanFromInt(valueBD: Int): Boolean =
+    fun toBooleanFromInt(valueBD: Int): Boolean = //  в рвмках идеи переделать на String -> Boolean
         if (valueBD == 1) true else false     // возможны изменения
 
-    fun toIntFromBoolean(boolean: Boolean): Int = if (boolean) 1 else 0
+    fun toIntFromBoolean(boolean: Boolean): Int = if (boolean) 1 else 0   //  в рвмках идеи переделать на Boolean -> String
 }
