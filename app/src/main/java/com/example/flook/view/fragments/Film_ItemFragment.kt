@@ -5,11 +5,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.helper.widget.Grid
 import androidx.fragment.app.Fragment
 import androidx.transition.Slide
 import com.bumptech.glide.Glide
-import com.example.flook.data.BaseFilm
 import com.example.flook.domain.Films
 import com.example.flook.R
 import com.example.flook.data.ApiConstants

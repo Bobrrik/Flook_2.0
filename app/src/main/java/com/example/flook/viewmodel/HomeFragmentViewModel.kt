@@ -27,7 +27,9 @@ class HomeFragmentViewModel() : ViewModel() {
     fun newPage(_page: Int = 1) {
         interactor.getFilmsFromApi(_page, object : ApiCallback {
             override fun onFailure() {
-                Log.e("PrIKOL", "что то не по плану")
+                Log.e("!!!  PrIKOL", "что то не по плану")
+                filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Log.e("!!!  PrIKOL", "Скоректировали")
             }
 
             override fun onSuccess(films: List<Films>) {

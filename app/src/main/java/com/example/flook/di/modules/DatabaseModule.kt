@@ -1,6 +1,8 @@
 package com.example.flook.di.modules
 
-import com.example.flook.data.BaseFilm
+import android.content.Context
+import com.example.flook.data.RepositoryBD
+import com.example.flook.data.db.DataBaseHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -9,5 +11,9 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Provides
     @Singleton
-    fun provideRepository() = BaseFilm()
+    fun provDataBaseHelper(context: Context) = DataBaseHelper(context)
+
+    @Provides
+    @Singleton
+    fun provideRepository(dataBaseHelper: DataBaseHelper) = RepositoryBD(dataBaseHelper)
 }
