@@ -10,10 +10,11 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         db?.execSQL(
             "CREATE TABLE $TABLE_NAME (" +
                     "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "$COLUMN_TITLE TEXT UNIQUE," +  //  1
-                    "$COLUMN_POSTER TEXT," +        //  2
-                    "$COLUMN_DESCRIPTION TEXT," +   //  3
-                    "$COLUMN_RATING REAL)"          //  4
+                    "$COLUMN_TITLE TEXT UNIQUE," +          //  1
+                    "$COLUMN_POSTER TEXT," +                //  2
+                    "$COLUMN_DESCRIPTION TEXT," +           //  3
+                    "$COLUMN_RATING REAL," +                //  4
+                    "$COLUMN_BEAST INTEGER DEFAULT '0' )"   //  5
 
         )
     }
@@ -31,6 +32,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         const val COLUMN_POSTER = "poster_path"
         const val COLUMN_DESCRIPTION = "overview"
         const val COLUMN_RATING = "vote_average"
+        const val COLUMN_BEAST = "beast"
     }
 
 

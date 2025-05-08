@@ -21,7 +21,8 @@ class RepositoryBD(dataBaseHelper: DataBaseHelper) {
             put(DataBaseHelper.COLUMN_TITLE, film.title)
             put(DataBaseHelper.COLUMN_POSTER, film.poster)
             put(DataBaseHelper.COLUMN_DESCRIPTION, film.textLong)
-            put(DataBaseHelper.COLUMN_RATING, film.rating)  // !!!!!  плавающая точка
+            put(DataBaseHelper.COLUMN_RATING, (film.rating).toDouble() / 10)
+            put(DataBaseHelper.COLUMN_BEAST, toIntFromBoolean(film.beast))
         }
         sqlDB.insert(DataBaseHelper.TABLE_NAME, null, cv)
     }
@@ -35,13 +36,17 @@ class RepositoryBD(dataBaseHelper: DataBaseHelper) {
                 val title = cursor.getString(1)
                 val poster = cursor.getString(2)
                 val textLong = cursor.getString(3)
-                val rating = (cursor.getDouble(4) * 10).toInt()
+                val rating = (cursor.getDouble(4) * 10).toInt()  // приходит Double а нужен Int
+                val best = toBooleanFromInt(cursor.getInt(5))       // приходит Int нужен Boolean
 
-                result.add(Films(title, textLong, poster, rating))
+                result.add(Films(title, textLong, poster, rating, best))
             } while (cursor.moveToNext())
         }
         return result
     }
 
+    fun toBooleanFromInt(valueBD: Int): Boolean =
+        if (valueBD == 1) true else false     // возможны изменения
 
+    fun toIntFromBoolean(boolean: Boolean): Int = if (boolean) 1 else 0
 }
