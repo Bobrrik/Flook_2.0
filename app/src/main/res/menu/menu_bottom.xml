@@ -13,7 +13,7 @@
     <item
         android:id="@+id/buttonLookLater"
         android:icon="@drawable/baseline_watch_later_24"
-        android:title="на потом" />
+        android:title="На потом" />
     <item
         android:id="@+id/buttonFilter"
         android:icon="@drawable/filter"

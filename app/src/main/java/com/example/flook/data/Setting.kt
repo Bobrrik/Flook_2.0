@@ -9,13 +9,11 @@ class Setting(context: Context) {
     private val preference: SharedPreferences =
         appContext.getSharedPreferences("setting", Context.MODE_PRIVATE)
 
-
     init {
         if (preference.getBoolean(KEY_FIRST_LAUNCH, false)) {
             preference.edit { putString(KEY_DEFAULT_CATEGORY, DEFAULT_CATEGORY) }
             preference.edit { putBoolean(KEY_FIRST_LAUNCH, false) }
         }
-
     }
 
     fun saveDefaultCategory(category: String) {

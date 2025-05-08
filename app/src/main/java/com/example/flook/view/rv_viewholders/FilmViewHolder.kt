@@ -22,7 +22,6 @@ class FilmViewHolder(private val bindingItem : ItemFilmBinding) : RecyclerView.V
             .centerCrop()
             .into(poster)
 
-//        poster.setImageResource(films.poster)
         description.text = films.textLong
         rating.setProgress(films.rating)
     }

@@ -16,13 +16,11 @@ import com.example.flook.domain.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
 
-
 class FilmBeastFragment : Fragment() {
     lateinit var binding: FragmentFilmBeastBinding
     private lateinit var filmAdapters: FilmAdapters
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
-
     }
     private var favoritesList = listOf<Films>()
         set(value) {
@@ -31,8 +29,6 @@ class FilmBeastFragment : Fragment() {
             field = filteredList
             filmAdapters.addItems(field)
         }
-
-//          favoritesList = favoritesList.filter { it.beast == true }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,11 +52,10 @@ class FilmBeastFragment : Fragment() {
         })
 
         AdapterBase()
-     //   StartWindows()
+//      StartWindows()
     }
 
     fun AdapterBase() {
-
         binding.recyclerView.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
                 override fun click(films: Films) {
@@ -74,11 +69,5 @@ class FilmBeastFragment : Fragment() {
         filmAdapters.addItems(favoritesList)
     }
 
-    fun StartWindows() {   // реализовать метод
-        if (filmAdapters.equals(null)) {
-            binding.blocking.alpha = 1f
-        } else {
-            binding.blocking.alpha = 0f
-        }
-    }
+    fun StartWindows() {}   // реализовать метод  // при помощи БД и запроса WHERE
 }

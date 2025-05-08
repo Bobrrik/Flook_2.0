@@ -30,15 +30,14 @@ class FilmHomeFragment : Fragment() {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
 
-    init {
-        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
-        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
-    }
+//    init {
+//        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
+//        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
+//    }
 
     private var filmDataBase = listOf<Films>()
         set(value) {
             if (field == value) return
-
             field = value
             filmAdapters.addItems(field)
         }
@@ -53,45 +52,16 @@ class FilmHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val scene = Scene(bindingFragment.homeFragmentRoot, binding.root) // смена сцены
-
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
             filmDataBase = it
             filmAdapters.addItems(it)
         })
 
         TransitionManager.go(scene, AnimatedOpen())
-
         AdapterBase()
-        ClickL()
         initPullToRefresh()
-
-        swapPage()
-    }
-
-    fun scrollSetting() {
-
-//        val scrollListener = object : RecyclerView.OnScrollListener() {
-//                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//
-//                        val layoutManager = recyclerView.layoutManager as RecyclerView.LayoutManager
-//                        val totalItemCount: Int = layoutManager.itemCount
-//                        val lastVisibleItems =
-//                            (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-//                        val endHasBeenReached = lastVisibleItems + 5 >= totalItemCount
-//
-//                        if (totalItemCount > 0 && endHasBeenReached) {
-//                            Log.e("activity", "ТЫ ТУТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-//                        }
-//            }
-//        }
-//        binding.recyclerView.setOnScrollListener(scrollListener)
-    }
-
-    fun swapPage() {
-//        HomeFragmentViewModel().newPage(2)
-//        filmAdapters.notifyDataSetChanged()
+        ClickL()
     }
 
     fun AnimatedOpen(): TransitionSet {                                             // Анимации обьектов по отдельности
@@ -137,7 +107,6 @@ class FilmHomeFragment : Fragment() {
     }
 
     fun AdapterBase() {
-
         binding.recyclerView.apply {
             filmAdapters = FilmAdapters(object : FilmAdapters.OnItemClickListener {
                 override fun click(films: Films) {
