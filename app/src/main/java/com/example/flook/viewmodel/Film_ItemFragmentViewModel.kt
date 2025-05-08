@@ -9,9 +9,9 @@ import com.example.flook.domain.Interactor
 import javax.inject.Inject
 
 class Film_ItemFragmentViewModel : ViewModel() {
+    val cv = ContentValues()
     @Inject
     lateinit var interactor: Interactor
-    val cv = ContentValues()
 
     init {
         App.instance.dagger.inject(this)
@@ -20,8 +20,7 @@ class Film_ItemFragmentViewModel : ViewModel() {
     fun swapBeast(context: Context, value: String, beastLi: Int) {
         val dataBaseHelper = DataBaseHelper(context)
         val sqlDb = dataBaseHelper.readableDatabase
-
-        cv.put(DataBaseHelper.COLUMN_BEAST, 1)           // реализовать удаление из бестов
+        cv.put(DataBaseHelper.COLUMN_BEAST, beastLi)           // реализовать удаление из бестов
 
         sqlDb.update(DataBaseHelper.TABLE_NAME, cv, DataBaseHelper.COLUMN_TITLE + "=?", arrayOf(value))
     }
