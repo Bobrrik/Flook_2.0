@@ -14,18 +14,16 @@ import com.example.flook.R
 import com.example.flook.databinding.FragmentSettingsBinding
 import com.example.flook.viewmodel.SettingsFragmentViewModel
 
-
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(SettingsFragmentViewModel::class.java)
     }
 
-    init {
-        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
-        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
-    }
-
+//    init {
+//        exitTransition = Slide(Gravity.START).apply { duration = 800;mode = Slide.MODE_OUT }
+//        reenterTransition = Slide(Gravity.START).apply { duration = 800; }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -14,16 +14,10 @@ object Converter {
                     textLong = it.overview,
                     poster = it.posterPath,
                     rating = (it.voteAverage * 10).toInt(),
-                    beast = random()
+                    beast = false
                 )
             )
         }
         return result
-    }
-
-    fun random(): Boolean {
-        val random = Random.nextInt(0, 10)
-        return if (random > 7) true
-        else false
     }
 }

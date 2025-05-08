@@ -18,7 +18,7 @@ class Interactor(
     fun getFilmsFromApi(
         page: Int,
         callback: HomeFragmentViewModel.ApiCallback
-    )      //    : List<Films> = repo.base
+    )
     {
         retrofitService.getFilms(
             category = getDefaultCategoryFromPreferences(),
@@ -35,8 +35,6 @@ class Interactor(
                 call: Call<TmdbResultsDto>,
                 response: Response<TmdbResultsDto>
             ) {
-                //  callback.onSuccess(Converter.convertApiListToDtoList(response.body()?.tmdbFilms))
-
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 list.forEach {
                     repo.putToBD(film = it)

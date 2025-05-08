@@ -9,7 +9,6 @@ import com.example.flook.di.modules.RemoteModule
 
 
 class App : Application() {
-
     lateinit var dagger: AppComponent
 
     override fun onCreate() {
@@ -28,5 +27,4 @@ class App : Application() {
         lateinit var instance: App
             private set
     }
-
 }

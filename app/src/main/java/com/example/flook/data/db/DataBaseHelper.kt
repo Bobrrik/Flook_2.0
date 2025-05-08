@@ -15,12 +15,10 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
                     "$COLUMN_DESCRIPTION TEXT," +           //  3
                     "$COLUMN_RATING REAL," +                //  4
                     "$COLUMN_BEAST INTEGER DEFAULT '0' )"   //  5
-
         )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-    }
+    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {}
 
     companion object {
         private const val DB_NAME = "films.db"
@@ -34,6 +32,4 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         const val COLUMN_RATING = "vote_average"
         const val COLUMN_BEAST = "beast"
     }
-
-
 }
