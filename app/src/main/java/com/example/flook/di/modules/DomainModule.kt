@@ -2,7 +2,7 @@ package com.example.flook.di.modules
 
 
 import android.content.Context
-import com.example.flook.data.BaseFilm
+import com.example.flook.data.RepositoryBD
 import com.example.flook.data.Setting
 import com.example.flook.data.TmdbApi
 import com.example.flook.domain.Interactor
@@ -21,7 +21,7 @@ class DomainModule(val context: Context) {
 
     @Provides
     @Singleton
-    fun provInteractor(base: BaseFilm, tmdbApi: TmdbApi, preferences: Setting) = Interactor(
+    fun provInteractor(base: RepositoryBD, tmdbApi: TmdbApi, preferences: Setting) = Interactor(
         repo = base,
         retrofitService = tmdbApi,
         preferences = preferences

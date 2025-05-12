@@ -1,7 +1,7 @@
 package com.example.flook.domain
 
 import com.example.flook.API
-import com.example.flook.data.BaseFilm
+import com.example.flook.data.RepositoryBD
 import com.example.flook.data.Setting
 import com.example.flook.data.TmdbApi
 import com.example.flook.utils.Converter
@@ -11,14 +11,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Interactor(
-    val repo: BaseFilm,
+    val repo: RepositoryBD,
     private val retrofitService: TmdbApi,
     private val preferences: Setting
 ) {
     fun getFilmsFromApi(
         page: Int,
         callback: HomeFragmentViewModel.ApiCallback
-    )      //    : List<Films> = repo.base
+    )
     {
         retrofitService.getFilms(
             category = getDefaultCategoryFromPreferences(),
@@ -35,10 +35,16 @@ class Interactor(
                 call: Call<TmdbResultsDto>,
                 response: Response<TmdbResultsDto>
             ) {
-                callback.onSuccess(Converter.convertApiListToDtoList(response.body()?.tmdbFilms))
+                val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
+                list.forEach {
+                    repo.putToBD(film = it)
+                }
+                callback.onSuccess(list)
             }
         })
     }
+
+    fun getFilmsFromDB():List<Films> = repo.getAllFromBD()
 
     fun saveDefaultCategoryFromPreferences(category: String) {
         preferences.saveDefaultCategory(category)
