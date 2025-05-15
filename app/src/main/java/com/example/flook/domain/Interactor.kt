@@ -4,6 +4,7 @@ import com.example.flook.API
 import com.example.flook.data.RepositoryBD
 import com.example.flook.data.Setting
 import com.example.flook.data.TmdbApi
+import com.example.flook.data.entity.Films
 import com.example.flook.utils.Converter
 import com.example.flook.viewmodel.HomeFragmentViewModel
 import retrofit2.Call
@@ -15,11 +16,7 @@ class Interactor(
     private val retrofitService: TmdbApi,
     private val preferences: Setting
 ) {
-    fun getFilmsFromApi(
-        page: Int,
-        callback: HomeFragmentViewModel.ApiCallback
-    )
-    {
+    fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
         retrofitService.getFilms(
             category = getDefaultCategoryFromPreferences(),
             apiKey = API.KAY,
@@ -37,18 +34,22 @@ class Interactor(
             ) {
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 list.forEach {
-                    repo.putToBD(film = it)
+                    repo.putToBD(films = list)
                 }
                 callback.onSuccess(list)
             }
         })
     }
 
-    fun getFilmsFromDB():List<Films> = repo.getAllFromBD()
+    fun getFilmsFromDB(): List<Films> = repo.getAllFromBD()
 
     fun saveDefaultCategoryFromPreferences(category: String) {
         preferences.saveDefaultCategory(category)
     }
 
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
+
+    fun swapBeast(film : Films){
+        repo.swapBeast(film)
+    }
 }

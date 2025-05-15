@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.flook.R
 import com.example.flook.data.ApiConstants
 import com.example.flook.databinding.FragmentFilmRvBinding
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 import com.example.flook.viewmodel.Film_ItemFragmentViewModel
 
 class Film_ItemFragment : Fragment() {
@@ -52,11 +52,13 @@ class Film_ItemFragment : Fragment() {
             if (film.beast) {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_no)
                 film.beast = false
-                viewModel.swapBeast(requireContext(), binding.detailsToolbar.title.toString(), 0)
+                viewModel.swapBeast(film)    //   <---- придумать как передать фильм для изменения избраности
+                //viewModel.swapBeast(requireContext(), binding.detailsToolbar.title.toString(), 0)
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
-                viewModel.swapBeast(requireContext(), binding.detailsToolbar.title.toString(), 1)
+             //   viewModel.swapBeast(film)
+                //viewModel.swapBeast(requireContext(), binding.detailsToolbar.title.toString(), 1)
             }
         }
     }

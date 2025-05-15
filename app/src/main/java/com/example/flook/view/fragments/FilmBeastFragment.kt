@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Slide
 import com.example.flook.MainActivity
 import com.example.flook.databinding.FragmentFilmBeastBinding
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
 

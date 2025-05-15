@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.flook.data.ApiConstants
 import com.example.flook.databinding.ItemFilmBinding
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 
 class FilmViewHolder(private val bindingItem : ItemFilmBinding) : RecyclerView.ViewHolder(bindingItem.root) {
 

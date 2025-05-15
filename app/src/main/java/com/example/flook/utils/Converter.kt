@@ -1,8 +1,7 @@
 package com.example.flook.utils
 
-import com.example.flook.data.TmdbFilm
-import com.example.flook.domain.Films
-import kotlin.random.Random
+import com.example.flook.data.entity.TmdbFilm
+import com.example.flook.data.entity.Films
 
 object Converter {
     fun convertApiListToDtoList(list: List<TmdbFilm>?): List<Films> {

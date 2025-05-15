@@ -1,48 +1,21 @@
 package com.example.flook.data
 
-import android.content.ContentValues
-import android.database.Cursor
-import com.example.flook.data.db.DataBaseHelper
-import com.example.flook.domain.Films
+import com.example.flook.data.dao.FilmDao
+import com.example.flook.data.entity.Films
+import java.util.concurrent.Executors
 
-class RepositoryBD(dataBaseHelper: DataBaseHelper) {
-    private val sqlDB = dataBaseHelper.readableDatabase
-    private lateinit var cursor: Cursor
 
-    fun putToBD(film: Films) {
-        val cv = ContentValues()
-        cv.apply {
-            put(DataBaseHelper.COLUMN_TITLE, film.title)
-            put(DataBaseHelper.COLUMN_POSTER, film.poster)
-            put(DataBaseHelper.COLUMN_DESCRIPTION, film.textLong)
-            put(DataBaseHelper.COLUMN_RATING, (film.rating).toDouble() / 10)
-            put(
-                DataBaseHelper.COLUMN_BEAST,
-                toIntFromBoolean(film.beast)
-            )      //  в рвмках идеи переделать на String -> Boolean
-        }
-        sqlDB.insert(DataBaseHelper.TABLE_NAME, null, cv)
+class RepositoryBD(private val filmDao: FilmDao) {
+
+    fun putToBD(films: List<Films>) {
+        Executors.newSingleThreadExecutor().execute { filmDao.insertAll(films) }
     }
 
     fun getAllFromBD(): List<Films> {
-        cursor = sqlDB.rawQuery("SELECT * FROM ${DataBaseHelper.TABLE_NAME}", null)
-        val result = mutableListOf<Films>()
-
-        if (cursor.moveToFirst()) {
-            do {
-                val title = cursor.getString(1)
-                val poster = cursor.getString(2)
-                val textLong = cursor.getString(3)
-                val rating = (cursor.getDouble(4) * 10).toInt()  // приходит Double а нужен Int
-                val best = toBooleanFromInt(cursor.getInt(5))    // приходит Int нужен Boolean
-
-                result.add(Films(title, textLong, poster, rating, best))
-            } while (cursor.moveToNext())
-        }
-        return result
+        return filmDao.getCachedFilms()
     }
 
-    fun toBooleanFromInt(valueBD: Int): Boolean = valueBD == 1
-
-    fun toIntFromBoolean(boolean: Boolean): Int = if (boolean) 1 else 0
+    fun swapBeast(film : Films) {
+        Executors.newSingleThreadExecutor().execute { filmDao.beastUp(film) }
+    }
 }
