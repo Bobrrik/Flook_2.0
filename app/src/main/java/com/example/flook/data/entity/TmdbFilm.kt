@@ -1,4 +1,4 @@
-package com.example.flook.data
+package com.example.flook.data.entity
 
 import com.google.gson.annotations.SerializedName
 

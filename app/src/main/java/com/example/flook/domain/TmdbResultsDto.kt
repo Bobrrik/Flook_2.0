@@ -1,6 +1,6 @@
 package com.example.flook.domain
 
-import com.example.flook.data.TmdbFilm
+import com.example.flook.data.entity.TmdbFilm
 import com.google.gson.annotations.SerializedName
 
 data class TmdbResultsDto(

@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.flook.App
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 import com.example.flook.domain.Interactor
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeFragmentViewModel() : ViewModel() {
@@ -22,9 +23,11 @@ class HomeFragmentViewModel() : ViewModel() {
     fun newPage(_page: Int = 1) {
         interactor.getFilmsFromApi(_page, object : ApiCallback {
             override fun onFailure() {
-                Log.e("!!! PrIKOL", "что то не по плану")
-                filmsListLiveData.postValue(interactor.getFilmsFromDB())
-                Log.e("!!! PrIKOL", "Скоректировали")
+                Executors.newSingleThreadExecutor().execute {
+                    Log.e("!!! PrIKOL", "что то не по плану")
+                    filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                    Log.e("!!! PrIKOL", "Скоректировали")
+                }
             }
 
             override fun onSuccess(films: List<Films>) {
