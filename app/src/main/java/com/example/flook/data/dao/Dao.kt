@@ -1,5 +1,6 @@
 package com.example.flook.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,7 +11,7 @@ import com.example.flook.data.entity.Films
 @Dao
 interface FilmDao {
     @Query("Select * From cached_films")
-    fun getCachedFilms(): List<Films>
+    fun getCachedFilms(): LiveData<List<Films>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<Films>)

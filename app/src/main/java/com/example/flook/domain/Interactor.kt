@@ -1,5 +1,6 @@
 package com.example.flook.domain
 
+import androidx.lifecycle.LiveData
 import com.example.flook.API
 import com.example.flook.data.RepositoryBD
 import com.example.flook.data.Setting
@@ -36,12 +37,12 @@ class Interactor(
                 list.forEach {
                     repo.putToBD(films = list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
         })
     }
 
-    fun getFilmsFromDB(): List<Films> = repo.getAllFromBD()
+    fun getFilmsFromDB(): LiveData<List<Films>> = repo.getAllFromBD()
 
     fun saveDefaultCategoryFromPreferences(category: String) {
         preferences.saveDefaultCategory(category)
