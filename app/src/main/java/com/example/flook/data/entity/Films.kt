@@ -1,24 +1,27 @@
-package com.example.flook.domain
+package com.example.flook.data.entity
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
-
+@Entity(tableName = "cached_films", indices = [Index(value = ["title"], unique = true)])
 data class Films(
-    val title: String,
-    var textLong: String,
-    val poster: String,
-    val rating: Int = 50,
-    var beast: Boolean = false
-) : Parcelable {
-
-    // val title: String, var textLong: String, val poster: Int, var beast: Boolean = false
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "overview") var textLong: String,
+    @ColumnInfo(name = "poster_path") val poster: String,
+    @ColumnInfo(name = "vote_average") val rating: Int = 50,
+    @ColumnInfo(name = "beastLi") var beast: Boolean = false,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
+)
+    : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString()
-        //parcel.readInt()
     )
 
     override fun describeContents(): Int {
@@ -28,7 +31,6 @@ data class Films(
     override fun writeToParcel(p0: Parcel, p1: Int) {
         p0.writeString(title)
         p0.writeString(textLong)
-//        p0.writeInt(poster)
         p0.writeString(poster)
     }
 

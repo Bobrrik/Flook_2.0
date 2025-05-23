@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +18,7 @@ import androidx.transition.TransitionSet
 import com.example.flook.MainActivity
 import com.example.flook.databinding.FragmentHomeBinding
 import com.example.flook.databinding.HomeScreenBinding
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
 import java.util.Locale
@@ -85,11 +86,6 @@ class FilmHomeFragment : Fragment() {
                     return true
                 }
 
-//                val result = filmDataBase.filter {
-//                    it.title.toLowerCase(Locale.getDefault())
-//                        .contains(newText.toLowerCase(Locale.getDefault()))
-//                }
-
                 val result = filmDataBase.filter {
                     it.title.lowercase(Locale.getDefault())
                         .contains(newText.lowercase(Locale.getDefault()))
@@ -103,7 +99,6 @@ class FilmHomeFragment : Fragment() {
                 return true
             }
         })
-
     }
 
     fun AdapterBase() {
@@ -121,6 +116,8 @@ class FilmHomeFragment : Fragment() {
     }
 
     private fun initPullToRefresh() {
+        viewModel.progressBarShow.observe(viewLifecycleOwner, Observer { binding.progressBar.isVisible = it })
+
         binding.refresh.setOnRefreshListener {
             filmAdapters.item.clear()
             viewModel.newPage()

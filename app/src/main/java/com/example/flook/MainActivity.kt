@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.flook.databinding.ActivityMainBinding
-import com.example.flook.domain.Films
+import com.example.flook.data.entity.Films
 import com.example.flook.view.fragments.FilmBeastFragment
 import com.example.flook.view.fragments.FilmHomeFragment
 import com.example.flook.view.fragments.Film_ItemFragment
