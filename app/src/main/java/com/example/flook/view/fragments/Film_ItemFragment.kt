@@ -5,15 +5,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Slide
 import com.bumptech.glide.Glide
 import com.example.flook.R
 import com.example.flook.data.ApiConstants
-import com.example.flook.databinding.FragmentFilmRvBinding
 import com.example.flook.data.entity.Films
+import com.example.flook.databinding.FragmentFilmRvBinding
 import com.example.flook.viewmodel.Film_ItemFragmentViewModel
 
 class Film_ItemFragment : Fragment() {
@@ -58,7 +57,7 @@ class Film_ItemFragment : Fragment() {
             } else {
                 binding.beastFab.setImageResource(R.drawable.baseline_favorite_yes)
                 film.beast = true
-             //   viewModel.swapBeast(film)
+                //   viewModel.swapBeast(film)
                 //viewModel.swapBeast(requireContext(), binding.detailsToolbar.title.toString(), 1)
             }
         }

@@ -57,6 +57,18 @@
         app:srcCompat="@drawable/settings" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dop_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/blue"
+        android:tint="@android:color/white"
+        android:translationX="-70dp"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@drawable/settings" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/beast_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,6 +89,18 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="left|bottom"
         app:srcCompat="@drawable/baseline_share_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/blue"
+        android:tint="@android:color/white"
+        android:translationX="70dp"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="left|bottom"
+        app:srcCompat="@drawable/save" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
