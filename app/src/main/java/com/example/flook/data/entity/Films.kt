@@ -34,6 +34,7 @@ data class Films(
         p0.writeString(poster)
     }
 
+
     companion object CREATOR : Parcelable.Creator<Films> {
         override fun createFromParcel(parcel: Parcel): Films {
             return Films(parcel)

@@ -1,16 +1,20 @@
 package com.example.flook.viewmodel
 
 import android.content.ContentValues
-import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModel
 import com.example.flook.App
-import com.example.flook.data.db.DataBaseHelper
 import com.example.flook.data.entity.Films
 import com.example.flook.domain.Interactor
+import java.net.URL
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class Film_ItemFragmentViewModel : ViewModel() {
     val cv = ContentValues()
+
     @Inject
     lateinit var interactor: Interactor
 
@@ -18,16 +22,15 @@ class Film_ItemFragmentViewModel : ViewModel() {
         App.instance.dagger.inject(this)
     }
 
-    fun swapBeast(film : Films) {
+    fun swapBeast(film: Films) {
         interactor.swapBeast(film)
     }
 
-//
-//    fun swapBeast(context: Context, value: String, beastLi: Int) {
-//        val dataBaseHelper = DataBaseHelper(context)
-//        val sqlDb = dataBaseHelper.readableDatabase
-//        cv.put(DataBaseHelper.COLUMN_BEAST, beastLi)           // изменение статуса изброности
-//
-//        sqlDb.update(DataBaseHelper.TABLE_NAME, cv, DataBaseHelper.COLUMN_TITLE + "=?", arrayOf(value))
-//    }
+    suspend fun LodePoster(urlString: String): Bitmap {
+        return suspendCoroutine {
+            val url = URL(urlString)
+            val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            it.resume(bitmap)
+        }
+    }
 }
