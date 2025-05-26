@@ -78,12 +78,12 @@ class Film_ItemFragment : Fragment() {
         return this.replace("'", "")
     }
 
-    fun savePoster(bitmap: Bitmap) {
+    fun savePoster(bitmap: Bitmap) {   //     заполнение параметров для сохранения
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val contentValue = ContentValues().apply {
                 put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
                 put(MediaStore.Images.Media.DISPLAY_NAME, film.title.handleSingleQuote())
-                put(MediaStore.Images.Media.CONTENT_TYPE, "image/jpeg")
+                put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")    // put(MediaStore.Images.Media.CONTENT_TYPE, "image/jpeg")
                 put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
                 put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
                 put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
@@ -106,8 +106,8 @@ class Film_ItemFragment : Fragment() {
     }
 
     fun performAsyncLoadOfPoster() {
-        if (!checkPermission()) {
-            requestPermission()
+        if (!checkPermission()) {  // проверка наличия разрешения на сохранение фото
+            requestPermission()       // запрос на разрешение
             return
         }
         MainScope().launch {
@@ -118,7 +118,7 @@ class Film_ItemFragment : Fragment() {
             savePoster(job.await())
             Snackbar.make(binding.root, R.string.downloaded_to_gallery, Snackbar.LENGTH_LONG)
                 .setAction(R.string.open) {
-                val intent = Intent()
+                    val intent = Intent()
                     intent.action = Intent.ACTION_VIEW
                     intent.type = "image/*"
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
