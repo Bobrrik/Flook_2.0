@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Scene
@@ -16,17 +15,23 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.example.flook.MainActivity
+import com.example.flook.data.entity.Films
 import com.example.flook.databinding.FragmentHomeBinding
 import com.example.flook.databinding.HomeScreenBinding
-import com.example.flook.data.entity.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class FilmHomeFragment : Fragment() {
     lateinit var bindingFragment: HomeScreenBinding
     lateinit var binding: FragmentHomeBinding
     private lateinit var filmAdapters: FilmAdapters
+    lateinit var scope: CoroutineScope
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
@@ -54,10 +59,17 @@ class FilmHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val scene = Scene(bindingFragment.homeFragmentRoot, binding.root) // смена сцены
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
-            filmDataBase = it
-            filmAdapters.addItems(it)
-        })
+
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListLiveData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmAdapters.addItems(it)
+                        filmDataBase = it
+                    }
+                }
+            }
+        }
 
         TransitionManager.go(scene, AnimatedOpen())
         AdapterBase()
@@ -116,7 +128,11 @@ class FilmHomeFragment : Fragment() {
     }
 
     private fun initPullToRefresh() {
-        viewModel.progressBarShow.observe(viewLifecycleOwner, Observer { binding.progressBar.isVisible = it })
+        scope.launch {
+            for (element in viewModel.progressBarShow) {
+                launch(Dispatchers.Main) { binding.progressBar.isVisible = element }
+            }
+        }
 
         binding.refresh.setOnRefreshListener {
             filmAdapters.item.clear()
@@ -124,4 +140,10 @@ class FilmHomeFragment : Fragment() {
             binding.refresh.isRefreshing = false
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
+    }
 }
+
