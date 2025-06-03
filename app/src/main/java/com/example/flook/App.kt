@@ -3,6 +3,7 @@ package com.example.flook
 import android.app.Application
 import com.example.flook.di.AppComponent
 import com.example.flook.di.DaggerAppComponent
+
 import com.example.flook.di.modules.DatabaseModule
 import com.example.flook.di.modules.DomainModule
 import com.example.flook.di.modules.RemoteModule

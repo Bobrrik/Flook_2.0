@@ -15,8 +15,13 @@ import com.example.flook.databinding.FragmentFilmBeastBinding
 import com.example.flook.data.entity.Films
 import com.example.flook.view.rv_adapters.FilmAdapters
 import com.example.flook.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FilmBeastFragment : Fragment() {
+    lateinit var scope: CoroutineScope
     lateinit var binding: FragmentFilmBeastBinding
     private lateinit var filmAdapters: FilmAdapters
     private val viewModel by lazy {
@@ -47,9 +52,15 @@ class FilmBeastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Films>> {
-            favoritesList = it
-        })
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListLiveData.collect {
+                    withContext(Dispatchers.Main) {
+                        favoritesList=it
+                    }
+                }
+            }
+        }
 
         AdapterBase()
 //      StartWindows()
