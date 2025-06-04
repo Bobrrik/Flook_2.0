@@ -7,11 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.flook.data.entity.Films
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FilmDao {
     @Query("Select * From cached_films")
-    fun getCachedFilms(): LiveData<List<Films>>
+    fun getCachedFilms(): Flow<List<Films>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<Films>)

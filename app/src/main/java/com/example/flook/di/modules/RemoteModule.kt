@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class RemoteModule {
+class RemoteModule() {
     @Provides
     @Singleton
     fun provOkHttpClient(): OkHttpClient {
@@ -42,5 +42,5 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provTmdbApi(retrofit: Retrofit) = retrofit.create(TmdbApi::class.java)
+    fun provTmdbApi(retrofit: Retrofit)  : TmdbApi= retrofit.create(TmdbApi::class.java)
 }

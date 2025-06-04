@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModel
 import com.example.flook.App
 import com.example.flook.data.entity.Films
 import com.example.flook.domain.Interactor
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -18,32 +20,18 @@ class HomeFragmentViewModel() : ViewModel() {
     @Inject
     lateinit var interactor: Interactor
 
-    //    lateinit var _context : SingleLiveEvent<Application>
-    val filmsListLiveData: LiveData<List<Films>>
-    var progressBarShow = MutableLiveData<Boolean>()
+    val filmsListLiveData: Flow<List<Films>>
+    var progressBarShow = Channel<Boolean>()
 
     init {
         App.instance.dagger.inject(this)
+        progressBarShow = interactor.progressBarState
         filmsListLiveData = interactor.getFilmsFromDB()
         newPage()
-//        _context.postValue(context)
     }
 
     fun newPage(_page: Int = 1) {
-        progressBarShow.postValue(true)
-        interactor.getFilmsFromApi(_page, object : ApiCallback {
-            override fun onSuccess() {
-                progressBarShow.postValue(false)
-                Log.e("!!! PrIKOL", "всё по плану")
-            }
-
-            override fun onFailure() {
-                Log.e("!!! PrIKOL", "что то не по плану")
-//                Toast.makeText(_context.value,"задание со звёздоччкой",Toast.LENGTH_SHORT).show()
-                progressBarShow.postValue(false)
-                Log.e("!!! PrIKOL", "Скоректировали")
-            }
-        })
+       interactor.getFilmsFromApi(_page)
     }
 
     interface ApiCallback {

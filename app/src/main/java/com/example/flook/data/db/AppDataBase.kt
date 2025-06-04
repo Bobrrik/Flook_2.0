@@ -6,6 +6,6 @@ import com.example.flook.data.dao.FilmDao
 import com.example.flook.data.entity.Films
 
 @Database(entities = [Films::class], version = 1, exportSchema = false)
-abstract class AppDataBase : RoomDatabase() {
-    abstract fun filmDao(): FilmDao
+abstract class AppDataBase :RoomDatabase() {
+    abstract fun  filmDao():FilmDao
 }

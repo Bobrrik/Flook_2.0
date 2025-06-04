@@ -11,7 +11,6 @@ android {
 
     buildFeatures {
         viewBinding = true
-     //   compose = true
         buildConfig = true
 
         compileOptions {
@@ -77,12 +76,12 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.okhttp3.logging.interceptor)
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-beta01")
 
     implementation ("com.google.dagger:dagger:2.56.2")
     kapt ("com.google.dagger:dagger-compiler:2.56.2")
     implementation ("androidx.core:core-ktx:1.16.0")
 
-    implementation ("androidx.room:room-runtime:2.2.6")
-    kapt ("androidx.room:room-compiler:2.2.6")
+    implementation ("androidx.room:room-runtime:2.7.1")
+    kapt ("androidx.room:room-compiler:2.7.1")
 }

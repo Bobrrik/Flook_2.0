@@ -5,7 +5,8 @@ import retrofit2.http.Query
 import com.example.flook.domain.TmdbResultsDto
 import retrofit2.Call
 
-interface TmdbApi {
+
+ interface TmdbApi {
     @GET("3/movie/popular")
     fun getFilms(
         @Query("category") category: String,
